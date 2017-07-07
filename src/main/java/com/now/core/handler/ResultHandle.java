@@ -6,7 +6,7 @@ import com.now.domain.Result;
  * 返回结果工具类
  * Created by Hujh on 2017/5/2.
  */
-public class ResultUtil {
+public class ResultHandler {
 
     //成功返回
     public static Result success() {

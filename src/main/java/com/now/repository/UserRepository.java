@@ -11,5 +11,5 @@ import java.util.List;
 public interface UserRepository extends JpaRepository<User, Integer>{
 
     //根据username查询
-    public List<User> findByUsername(String username);
+    List<User> findByUsername(String username);
 }

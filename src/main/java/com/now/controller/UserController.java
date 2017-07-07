@@ -3,8 +3,9 @@ package com.now.controller;
 import com.now.domain.Result;
 import com.now.domain.User;
 import com.now.repository.UserRepository;
-import com.now.service.UserService;
-import com.now.util.ResultUtil;
+import com.now.service.UserServiceImpl;
+import com.now.core.handler.ResultHandle;
+import com.now.service.impl.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -23,41 +24,38 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private UserRepository userRepository;
-
     /**
      * 查询所有用户
      * @return
      */
-    @GetMapping(value="/findAll")
+    @GetMapping(value="/")
     public List<User> findAll() {
-        return userRepository.findAll();
+        return userService.findAll();
     }
 
     /**
      * 根据id
      * @return
      */
-    @GetMapping(value="/findOne/{id}")
+    @GetMapping(value="/{id}")
     public User findOne(@PathVariable("id") Integer id) {
-        return userRepository.findOne(id);
+        return userService.findOne(id);
     }
 
     /**
      * 根据id
      * @return
      */
-    @GetMapping(value="/findByUsername/{username}")
+    @GetMapping(value="/username/{username}")
     public List<User> findOne(@PathVariable("username") String username) {
-        return userRepository.findByUsername(username);
+        return userService.findByUsername(username);
     }
 
     /**
      * 根据id
      * @return
      */
-    @GetMapping(value="/findAge/{id}")
+    @GetMapping(value="/age/{id}")
     public void findAge(@PathVariable("id") Integer id) throws Exception {
         userService.findAge(id);
     }
@@ -68,31 +66,21 @@ public class UserController {
      * @param user
      * @return
      */
-    @PostMapping(value = "/insert")
-    public Result<User> insert(@Valid User user, BindingResult bindingResult) {
+    @PostMapping(value = "/save")
+    public Result<User> save(@Valid User user, BindingResult bindingResult) {
         if(bindingResult.hasErrors()) {
-            ResultUtil.error(1, bindingResult.getFieldError().getDefaultMessage());
+            ResultHandle.error(1, bindingResult.getFieldError().getDefaultMessage());
         }
-        return ResultUtil.success(user);
-    }
-
-    /**
-     * 更新
-     * @param user
-     * @return
-     */
-    @PutMapping(value = "/update")
-    public User update(User user) {
-        return userRepository.save(user);
+        return ResultHandle.success(user);
     }
 
     /**
      * 删除一个用户
      * @param id
      */
-    @DeleteMapping(value = "/delete/{id}")
+    @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable("id") Integer id) {
-        userRepository.delete(id);
+        userService.delete(id);
     }
 
 

@@ -1,4 +1,4 @@
-package com.now.util;
+package com.now.core.handler;
 
 import com.now.domain.Result;
 
@@ -6,7 +6,7 @@ import com.now.domain.Result;
  * 返回结果工具类
  * Created by Hujh on 2017/5/2.
  */
-public class ResultHandler {
+public class ResultHandle {
 
     //成功返回
     public static Result success() {

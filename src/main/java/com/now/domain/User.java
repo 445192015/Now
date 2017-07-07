@@ -3,12 +3,14 @@ package com.now.domain;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.Min;
 
 /**
  * Created by Hujh on 2017/5/2.
  */
 @Entity
+@Table(name = "bs_user")
 public class User {
 
     @Id

@@ -1,4 +1,4 @@
-package com.now.domain;
+package com.now.entity;
 
 /**
  * 请求返回对象

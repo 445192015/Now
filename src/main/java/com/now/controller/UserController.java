@@ -1,16 +1,16 @@
 package com.now.controller;
 
-import com.now.domain.Result;
-import com.now.domain.User;
-import com.now.repository.UserRepository;
-import com.now.service.UserServiceImpl;
+import com.baomidou.mybatisplus.plugins.Page;
 import com.now.core.handler.ResultHandle;
+import com.now.entity.Result;
+import com.now.entity.User;
 import com.now.service.impl.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,46 +24,23 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+
     /**
-     * 查询所有用户
+     * 分页
      * @return
      */
-    @GetMapping(value="/")
-    public List<User> findAll() {
-        return userService.findAll();
+    @GetMapping("/selectPage/{current}/{size}")
+    public Page<User> selectPage(@PathVariable(value = "current") Integer current,
+                                 @PathVariable(value = "size") Integer size) {
+        System.err.println(current);
+        System.err.println(size);
+        return userService.selectPage(new Page<User>(current, size));
     }
 
     /**
-     * 根据id
-     * @return
-     */
-    @GetMapping(value="/{id}")
-    public User findOne(@PathVariable("id") Integer id) {
-        return userService.findOne(id);
-    }
-
-    /**
-     * 根据id
-     * @return
-     */
-    @GetMapping(value="/username/{username}")
-    public List<User> findOne(@PathVariable("username") String username) {
-        return userService.findByUsername(username);
-    }
-
-    /**
-     * 根据id
-     * @return
-     */
-    @GetMapping(value="/age/{id}")
-    public void findAge(@PathVariable("id") Integer id) throws Exception {
-        userService.findAge(id);
-    }
-
-
-    /**
-     * 新增用户
+     * 新增
      * @param user
+     * @param bindingResult
      * @return
      */
     @PostMapping(value = "/save")
@@ -71,7 +48,16 @@ public class UserController {
         if(bindingResult.hasErrors()) {
             ResultHandle.error(1, bindingResult.getFieldError().getDefaultMessage());
         }
-        return ResultHandle.success(user);
+
+        List<User> users = new ArrayList<User>();
+        for (int i = 0; i < 100; i++) {
+            User _user = new User();
+            _user.setName("Name" + i);
+            users.add(_user);
+        }
+        userService.insertBatch(users);
+
+        return ResultHandle.success(users);
     }
 
     /**
@@ -80,8 +66,7 @@ public class UserController {
      */
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable("id") Integer id) {
-        userService.delete(id);
+        userService.deleteById(id);
     }
-
 
 }

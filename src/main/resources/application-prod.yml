@@ -1,0 +1,7 @@
+server:
+  port: 8082
+
+user:
+  username: adad
+  age: 1212
+

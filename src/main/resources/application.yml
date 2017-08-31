@@ -1,6 +1,14 @@
+#app
+server:
+  port: 8080
+  session:
+    timeout: 3000
+
+#spring
 spring:
-  profiles:
-    active: dev
+  devtools:
+    restart:
+      enabled: false
 
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
@@ -12,3 +20,29 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+  data:
+    mongodb:
+      uri: mongodb://127.0.0.1:27017/admin
+
+
+
+#mybatis-plus
+mybatis-plus:
+  mapper-locations: classpath:/mapper/*Mapper.xml
+  typeAliasesPackage: com.now.entity
+  global-config:
+#    id生成策略
+#    IdType.AUTO	数据库ID自增
+#    IdType.INPUT	用户输入ID
+#    IdType.ID_WORKER	全局唯一ID，内容为空自动填充（默认配置）
+#    IdType.UUID	全局唯一ID，内容为空自动填充
+    id-type: 2
+    field-strategy: 2
+    auto-set-db-type: true
+    db-column-underline: true
+    refresh-mapper: true
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+    key-generators:
+

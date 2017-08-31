@@ -1,7 +1,7 @@
-package com.now.domain;
+package com.now.entity.cm;
 
 /**
- * 请求返回对象
+ * Controller请求返回对象
  * Created by Hujh on 2017/5/2.
  */
 public class Result<T> {

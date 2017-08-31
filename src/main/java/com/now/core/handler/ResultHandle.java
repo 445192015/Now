@@ -1,6 +1,6 @@
 package com.now.core.handler;
 
-import com.now.domain.Result;
+import com.now.entity.cm.Result;
 
 /**
  * 返回结果工具类

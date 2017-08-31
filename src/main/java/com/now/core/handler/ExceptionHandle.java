@@ -1,6 +1,6 @@
 package com.now.core.handler;
 
-import com.now.entity.Result;
+import com.now.entity.cm.Result;
 import com.now.core.exception.NowException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

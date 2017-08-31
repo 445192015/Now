@@ -1,6 +1,8 @@
 #app
 server:
   port: 8080
+  session:
+    timeout: 3000
 
 #spring
 spring:
@@ -18,8 +20,13 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+  data:
+    mongodb:
+      uri: mongodb://127.0.0.1:27017/admin
 
-#mybatis
+
+
+#mybatis-plus
 mybatis-plus:
   mapper-locations: classpath:/mapper/*Mapper.xml
   typeAliasesPackage: com.now.entity
@@ -38,3 +45,4 @@ mybatis-plus:
     map-underscore-to-camel-case: true
     cache-enabled: false
     key-generators:
+

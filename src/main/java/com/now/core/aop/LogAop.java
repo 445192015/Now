@@ -47,7 +47,7 @@ public class LogAop {
 
     @AfterReturning(returning = "object", pointcut = "log()")
     public void logAfterReturning(Object object) {
-        logger.info("return={}" + object);
+        logger.info("return={}", object);
     }
 
 }
